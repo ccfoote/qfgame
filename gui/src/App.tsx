@@ -14,7 +14,7 @@ function App() {
   const { width, height } = useWindowDimensions();
   const mainAreaWidth = Math.min(width - 30, 1200);
   const offsetLeft = (width - mainAreaWidth) / 2;
-  const [okayToViewSmallScreen, setOkayToViewSmallScreen] = useState(false);
+  const [okayToViewSmallScreen, setOkayToViewSmallScreen] = useState(true);  // set to false to enable the message
   if (width < 800 && !okayToViewSmallScreen) {
     return (
       <SmallScreenMessage
