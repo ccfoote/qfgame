@@ -69,8 +69,6 @@ Welcome! Are you a queer ally?
 
 I'll ask some questions, and we'll see how LGBTQ-friendly you can be. The score for each question will be between -2 and 2.
 
-(For now, due to some technical glitches, you may need to keep scrolling down on the chat window to see my responses)
-
 Tell me a bit about yourself (your age, gender, any other helpful info) and then we'll get started!
 `;
   }, []);
@@ -116,7 +114,7 @@ const EditContributorsChatWindowChild: FunctionComponent<{
   const settingsBarHeight = 20;
   const topBarHeight = 24;
 
-  const [modelName, setModelName] = useState("openai/gpt-4o");
+  const [modelName, setModelName] = useState("anthropic/claude-3.5-sonnet");
 
   const handleUserMessage = useCallback(
     (message: string) => {
