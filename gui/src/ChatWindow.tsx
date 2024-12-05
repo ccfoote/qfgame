@@ -65,11 +65,12 @@ const ChatWindow: FunctionComponent<
   }, []);
   const initialMessage = useMemo(() => {
     return `
-Welcome! Are you a queer ally?
+Welcome! This app is designed to help you become a better LGBTQ+ ally through interactive learning.
 
-I'll ask some questions, and we'll see how LGBTQ-friendly you can be. The score for each question will be between -2 and 2.
+You’ll encounter different scenarios and respond with what you’d do in each situation.
+After each response, you’ll receive a score between -2 and 2, along with personalized feedback to help you grow as an ally.
 
-Tell me a bit about yourself (your age, gender, any other helpful info) and then we'll get started!
+To get started, tell us a little about yourself—your age, gender, or anything else you think is helpful to know. Let’s begin!
 `;
   }, []);
   const systemMessage = useSystemMessage(tools, initialMessage);
@@ -433,7 +434,7 @@ const EditContributorsChatWindowChild: FunctionComponent<{
   );
 
   // layout
-  const chatAreaWidth = Math.min(width - 30, 1100);
+  const chatAreaWidth = Math.min(width - 30, 800);
   const offsetLeft = (width - chatAreaWidth) / 2;
 
   // when a new message comes, scroll to the bottom

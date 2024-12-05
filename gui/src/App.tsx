@@ -12,7 +12,7 @@ const openRouterKey = "sk-or" + "-v1-" + "4515b1afe37b8d66b1877e0a619840cc4561b2
 
 function App() {
   const { width, height } = useWindowDimensions();
-  const mainAreaWidth = Math.min(width - 30, 1200);
+  const mainAreaWidth = Math.min(width - 30, 800);
   const offsetLeft = (width - mainAreaWidth) / 2;
   const [okayToViewSmallScreen, setOkayToViewSmallScreen] = useState(true);  // set to false to enable the message
   if (width < 800 && !okayToViewSmallScreen) {
@@ -27,7 +27,8 @@ function App() {
       style={{
         position: "absolute",
         left: offsetLeft,
-        width: mainAreaWidth
+        width: mainAreaWidth,
+        height
       }}
     >
       <MainWindow
@@ -44,7 +45,7 @@ const MainWindow: FunctionComponent<{ width: number; height: number }> = ({ widt
   const [score, setScore] = useState(0);
   const [chat, chatDispatch] = useReducer(chatReducer, emptyChat);
   return (
-    <div style={{ position: 'absolute', width, height }}>
+    <div style={{ position: 'absolute', width, height, overflow: 'hidden' }}>
       <div style={{ position: 'absolute', width, height: chatWindowHeight }}>
         <ChatWindow
           width={width}
@@ -56,7 +57,7 @@ const MainWindow: FunctionComponent<{ width: number; height: number }> = ({ widt
           setScore={setScore}
         />
       </div>
-      <div style={{ position: 'absolute', width, height: bottomPanelHeight, top: height - bottomPanelHeight, fontWeight: 'bold', fontSize: 20 }}>
+      <div style={{ position: 'absolute', left: 0, width, height: bottomPanelHeight, top: height - bottomPanelHeight, fontWeight: 'bold', fontSize: 20 }}>
         Total score: {score}
       </div>
     </div>
