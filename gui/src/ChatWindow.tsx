@@ -114,7 +114,7 @@ const EditContributorsChatWindowChild: FunctionComponent<{
   const settingsBarHeight = 20;
   const topBarHeight = 24;
 
-  const [modelName, setModelName] = useState("anthropic/claude-3.5-sonnet");
+  const [modelName, setModelName] = useState("openai/gpt-4o");
 
   const handleUserMessage = useCallback(
     (message: string) => {
