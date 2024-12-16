@@ -65,12 +65,14 @@ const ChatWindow: FunctionComponent<
   }, []);
   const initialMessage = useMemo(() => {
     return `
-Welcome! This app is designed to help you become a better LGBTQ+ ally through interactive learning.
+Welcome! This app is designed to help you become more familiar with the solar system through interactive learning.
 
-You’ll encounter different scenarios and respond with what you’d do in each situation.
-After each response, you’ll receive a score between -2 and 2, along with personalized feedback to help you grow as an ally.
+You’ll be presented with different questions related to the solar system.
+After each response, you’ll receive a score between -2 and 2, along with personalized feedback to help you grow as a solar system expert.
 
-To get started, tell us a little about yourself—your age, gender, or anything else you think is helpful to know. Let’s begin!
+To get started, let me know the difficulty level you want to work at:
+
+very easy, easy, medium, difficult, or very difficult.
 `;
   }, []);
   const systemMessage = useSystemMessage(tools, initialMessage);
@@ -733,80 +735,33 @@ const useSystemMessage = (
   initialMessage: string,
 ) => {
   let systemMessage = `
-You are going to as the user questions to quiz them based on certain values that will be provided below.
-Each question will be short and will describe a scenario and ask the user what they would do in that scenario.
+You are going to ask the user questions to quiz them based on their knowledge of the solar system.
+Each question will be short and will describe give some context and ask the user something. It should be an open-ended question, not just reciting a fact, but something they will need to respond with no more than a sentence.
 Then you will judge the answer based on the values.
-If the answer is irrelevant to the scenario and the question, then you will respond politely that it is irrelevant and prompt them to try again.
-You will give a score between -2 and 2 where -2 is the worst (least adherent to the values) and 2 is the best (most adherent to the values).
-Tell the user the score, give a bit of feedback, and then proceed to the next question. You shouldn't require a prompt from the user in order to proceed with the next question.
+If the answer is irrelevant to the question, then you will respond politely that it is irrelevant and prompt them to try again.
+You will give a score between -2 and 2 where -2 is the worst (least correct) and 2 is the best (most correct and most thorough).
+Tell the user the score, give them some very helpful feedback (perhaps additional information), and then proceed to the next question. You shouldn't require a prompt from the user in order to proceed with the next question.
 When you tell the score, include it in square brackets like this: [-1], [0], [1], etc. That way the system can detect the score and tally the results.
-You should stick to only scenarios relevant to the values described below and you should judge only based on the values below.
-You can use other general knowledge for background, but no other values should be considered in the scoring.
+You should stick to only information relevant to the solar system as described below and you should judge only based on the information below.
+You can use other general knowledge for background, but no other facts should be considered in the scoring.
 The first user message will be a response to the following initial prompt: ${initialMessage}
 If the user seems to intentially be trying to get a low score and being disrespectful, you can end the conversation politely.
-If possible, try to cater the questions to the demographics of the user. However the scenarios should still always be relevant to the values below.
+You should adhere to the user's difficulty level request. If they ask for easy questions, then make sure the questions are very easy.
 
-Here are the values:
-7 EASY WAYS TO BE INCLUSIVE:
-CREATING AN AFFIRMING ENVIRONMENT FOR LESBIAN, GAY,
-BISEXUAL and TRANSGENDER MEMBERS OF THE ITHACA COLLEGE
-COMMUNITY
-#1- Know General Definitions
-When talking about gender and sexual orientation, many people want to use correct
-terminology, but don’t have useful definitions. This is especially true when
-discussing gender. Remember that people use different criteria for identifying
-these groups and that no one can assume another’s identity based on these
-definitions. To get a general idea of the terms used to talk about gender and sexual
-orientation, go to the LGBT resource center website in the resource section.
-#2 – Include LGBT-themed flyers, posters and publications in your
-classroom and office.
-When you include LGBT-themed materials in your classroom and office without
-drawing special attention to them, you help to create an atmosphere where LGBT
-people do not feel excluded or singled out for their gender or sexual identities. For
-example, hang a poster for an LGBT themed film festival the same way you would
-hang a poster for an environmentally themed film festival. If you feel comfortable,
-you can hang a safe space card in your office. Call the LGBT Center for more
-information
-#3- Use inclusive language at all times
-Using inclusive language means talking in a way that does not specify a gender, sex,
-or sexual orientation unless it is pertinent to the comment. For example, it is
-unnecessary to point out that a student is a woman unless the comment is
-specifically discussing the relevance of gender. You can also substitute the inclusive
-terms, “partner” or “significant other” instead of specifying “husband/wife/spouse”.
-Here are a few more examples for you to use:
-• “are you dating anyone?” instead of “do you have a boyfriend/girlfriend?”
-• “students turn in their papers” instead of “each student turn in his/her
-paper”
-• refer to the student’s “family” instead of “mom and dad” (this includes
-students who may have single, step or LGBT parents or alternate guardians)
-Park School of Communications*
-#4 - Remember that you don’t know anyone’s sexual orientation or
-gender identity unless they tell you
-Lesbian, gay, bisexual, and transgender people come in all sizes, abilities, colors,
-styles, political persuasions, religious affiliations, cultural backgrounds,
-relationships statuses, educational histories and ages. In short, there is just as
-much diversity among people who identify as LGBT as there is among those who
-identify as heterosexual.
-#5 - Have an inclusive curriculum.
-It is important for all students to be able to relate to examples and case studies
-used in the classroom. In professions where interviews and other forms of
-communication are a focus, it is important that students learn to use inclusive
-language. This will help students to build good rapport with the people they
-interview and work with.
-#6 - Confront comments that are heterosexist or gender identity
-biased when you hear them.
-Once you are educated about LGBT people, step in and educate others. Respond
-when you hear others using non-inclusive language, making derogatory jokes, using
-incorrect assumptions/stereotypes, voicing misinformation, etc. Tell them why you
-think their comment was inappropriate and how they can improve it. Feel free to
-give them a copy of the tip sheet!
-#7 – Don’t let tension around sexual orientation or gender identity
-continue to be unaddressed in your department because you’re not sure
-that you know how to handle it.
- You are not alone in this process. There is help on campus. The Center for Lesbian,
-Gay, Bisexual, & Transgender Education, Outreach and Services and the Office of
-Human Resources have staff and resources to help you and your department work
-through any issues that may arise.
+Here is the information about the solar system to draw from:
+The Solar System[d] is the gravitationally bound system of the Sun and the objects that orbit it.[11] It formed about 4.6 billion years ago when a dense region of a molecular cloud collapsed, forming the Sun and a protoplanetary disc. The Sun is a typical star that maintains a balanced equilibrium by the fusion of hydrogen into helium at its core, releasing this energy from its outer photosphere. Astronomers classify it as a G-type main-sequence star.
+
+The largest objects that orbit the Sun are the eight planets. In order from the Sun, they are four terrestrial planets (Mercury, Venus, Earth and Mars); two gas giants (Jupiter and Saturn); and two ice giants (Uranus and Neptune). All terrestrial planets have solid surfaces. Inversely, all giant planets do not have a definite surface, as they are mainly composed of gases and liquids. Over 99.86% of the Solar System's mass is in the Sun and nearly 90% of the remaining mass is in Jupiter and Saturn.
+
+There is a strong consensus among astronomers[e] that the Solar System has at least nine dwarf planets: Ceres, Orcus, Pluto, Haumea, Quaoar, Makemake, Gonggong, Eris, and Sedna. There are a vast number of small Solar System bodies, such as asteroids, comets, centaurs, meteoroids, and interplanetary dust clouds. Some of these bodies are in the asteroid belt (between Mars's and Jupiter's orbit) and the Kuiper belt (just outside Neptune's orbit).[f] Six planets, seven dwarf planets, and other bodies have orbiting natural satellites, which are commonly called 'moons'.
+
+The Solar System is constantly flooded by the Sun's charged particles, the solar wind, forming the heliosphere. Around 75–90 astronomical units from the Sun,[g] the solar wind is halted, resulting in the heliopause. This is the boundary of the Solar System to interstellar space. The outermost region of the Solar System is the theorized Oort cloud, the source for long-period comets, extending to a radius of 2,000–200,000 AU. The closest star to the Solar System, Proxima Centauri, is 4.25 light-years (269,000 AU) away. Both stars belong to the Milky Way galaxy.
+
+Astronomers sometimes divide the Solar System structure into separate regions. The inner Solar System includes Mercury, Venus, Earth, Mars, and the bodies in the asteroid belt. The outer Solar System includes Jupiter, Saturn, Uranus, Neptune, and the bodies in the Kuiper belt.[35] Since the discovery of the Kuiper belt, the outermost parts of the Solar System are considered a distinct region consisting of the objects beyond Neptune.[36]
+
+The principal component of the Solar System is the Sun, a G-type main-sequence star that contains 99.86% of the system's known mass and dominates it gravitationally.[37] The Sun's four largest orbiting bodies, the giant planets, account for 99% of the remaining mass, with Jupiter and Saturn together comprising more than 90%. The remaining objects of the Solar System (including the four terrestrial planets, the dwarf planets, moons, asteroids, and comets) together comprise less than 0.002% of the Solar System's total mass.[h]
+
+The Sun is composed of roughly 98% hydrogen and helium,[41] as are Jupiter and Saturn.[42][43] A composition gradient exists in the Solar System, created by heat and light pressure from the early Sun; those objects closer to the Sun, which are more affected by heat and light pressure, are composed of elements with high melting points. Objects farther from the Sun are composed largely of materials with lower melting points.[44] The boundary in the Solar System beyond which those volatile substances could coalesce is known as the frost line, and it lies at roughly five times the Earth's distance from the Sun.[5]
 `;
   for (const tool of tools) {
     if (tool.detailedDescription) {
